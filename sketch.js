@@ -21,16 +21,19 @@ var maxPeople = 3;
 var bgHeightInPixels = 450;
 
 var critic;
-var comicBookSize  = 10; // Must be an even number. (population...)
+var comicBookSize  = 20; // Must be an even number. (population...)
 var mutationChance = 0.05;
 
 // For the punchlines
 var punchline_structures;
 var punchline_vocabulary;
 
-var critic_created       = false;
-var pl_structures_loaded = false;
-var pl_vocabulary_loaded = false;
+// This needs to be set to 5 before we display the critic:
+var critic_avatars_loaded = 0;
+
+var critic_created        = false;
+var pl_structures_loaded  = false;
+var pl_vocabulary_loaded  = false;
 
 // We need this to replace some funky text in generated punchlines.
 String.prototype.replaceAll = function(search, replacement) {
@@ -39,6 +42,7 @@ String.prototype.replaceAll = function(search, replacement) {
 };
 
 function preload(){
+  randomSeed(1);
   /* Load the JSON files for the structures and vocabulary
      The text structure, words, and their frequency come from
      103 parsed New Yorker cartoon captions, modified to remove
@@ -119,7 +123,7 @@ function draw() {
       critic.setScaleByPercent(0.6);
       critic.commissionWork();
       critic_created = true;
-    } else {
+    } else if (critic_avatars_loaded == 5){
       critic.display();
       critic.displayPage();
       noLoop();
@@ -129,6 +133,12 @@ function draw() {
 
 function mouseClicked(){
   loop();
+}
+
+function keyTyped(){
+  if(key === "r"){
+    critic.reset();
+  }
 }
 
 

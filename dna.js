@@ -112,10 +112,8 @@ function DNA(){
         var next_structure = this.pl_structure[w+1];
         if (next_structure == "." || 
             next_structure == ":" || 
-            next_structure == "," || 
-            next_structure == "''"||
-            next_structure == '``'){
-          // No space following
+            next_structure == ","){
+          // No space following  next_structure == "''" || next_structure == '``'
           continue;
         } else {
           this.punchline += " ";
@@ -125,13 +123,16 @@ function DNA(){
     
     // Clean up the generated punchline.
     // This isn't working  - need to use regex.
-    // this.punchline = this.punchline.replace(" i ", " I ");
     // this.punchline = this.punchline.replace(" i."," I.");
     // this.punchline = this.punchline.replace("I is","I am");
-    // this.punchline = this.punchline.replace(" 's","'s");
-    // this.punchline = this.punchline.replace("s ' ","s' ");
+    // 
     this.punchline = this.applySentenceCase(this.punchline);
-
+    this.punchline = this.punchline.replace(/i(?=[\s.,!"'\b])/g, "I");
+    this.punchline = this.punchline.replace(" 's","'s");
+    this.punchline = this.punchline.replace("s ' ","s' ");
+    this.punchline = this.punchline.replace(/(I is )/g,"I am ");
+    this.punchline = this.punchline.replace(/(Him is )/g,"He is ");
+    // print(this.punchline);
   }
   
   // This method is used to create the initial population of comics. 

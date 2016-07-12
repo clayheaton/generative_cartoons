@@ -1,11 +1,12 @@
 
 /* The target is set by the critic, who has a somewhat random sense of humor. */
 function Critic(){
-  this.cAngryMost = new SpecialImage("images/critic/critic05.png");
-  this.cAngry     = new SpecialImage("images/critic/critic04.png");
-  this.cNeutral   = new SpecialImage("images/critic/critic01.png");
-  this.cHappy     = new SpecialImage("images/critic/critic02.png");
-  this.cHappyMost = new SpecialImage("images/critic/critic03.png");
+
+  this.cAngryMost = new SpecialImage("images/critic/critic05.png", function(){critic_avatars_loaded += 1;});
+  this.cAngry     = new SpecialImage("images/critic/critic04.png", function(){critic_avatars_loaded += 1;});
+  this.cNeutral   = new SpecialImage("images/critic/critic01.png", function(){critic_avatars_loaded += 1;});
+  this.cHappy     = new SpecialImage("images/critic/critic02.png", function(){critic_avatars_loaded += 1;});
+  this.cHappyMost = new SpecialImage("images/critic/critic03.png", function(){critic_avatars_loaded += 1;});
   
   this.draw_scale   = 1.0;
   this.pixels_high  = 200;
@@ -18,8 +19,9 @@ function Critic(){
   this.preference.initAsRandom();
   
   // Store the population of comics
-  this.comicBook     = [];
+  this.comicBook             = [];
   this.comicBookTotalFitness = 0;
+  
   // Index number of the first of two comics from this pool that we'll show.
   this.comicBookPage = 0;
   
@@ -28,6 +30,21 @@ function Critic(){
   
   // Track the generation;
   this.generation = 1;
+  
+  // Want to start over? Reset the critic.
+  this.reset = function(){
+    this.generation       = 1;
+    this.createFirstPool  = true;
+    this.comicBookPage    = 0;
+    this.comicBook        = [];
+    this.comicBookFitness = 0;
+    
+    this.preference = new DNA();
+    this.preference.initAsRandom();
+    
+    this.commissionWork();
+    loop();
+  }
   
   // Commission work
   this.commissionWork = function(){
@@ -164,13 +181,14 @@ function Critic(){
     textSize(14);
     textAlign(LEFT);
     var inst = "The Comic Critic has a preference for certain types of cartoons. Each generation, ";
-    inst += "he commissions 10 cartoons based on his enjoyment of the previous generation.\n\nClick to view ";
-    inst += "cartoons in each generation.\n\nAfter 5 clicks, the critic commissions the next generation.";
+    inst += "he commissions " + comicBookSize + " cartoons based on his enjoyment of the previous generation.\n\nClick to view ";
+    inst += "cartoons in each generation.\n\nAfter " + parseInt(comicBookSize / 2) + " clicks, the critic commissions the next generation.";
+    inst += "\n\nPress 'r' to reset.";
     
-    text(inst,10,230,190,280);
+    text(inst,10,220,190,280);
     
     textAlign(CENTER);
-    text("Generation " + this.generation,100,490);
+    text("Generation " + this.generation,100,500);
     
     // TODO: Change attitude.
     
