@@ -132,6 +132,13 @@ function DNA(){
     this.punchline = this.punchline.replace("s ' ","s' ");
     this.punchline = this.punchline.replace(/(I is )/g,"I am ");
     this.punchline = this.punchline.replace(/(Him is )/g,"He is ");
+    this.punchline = this.punchline.replace(/(hatfield)/g,"Hatfield");
+    this.punchline = this.punchline.replace(/(mccoy)/g,"McCoy");
+    this.punchline = this.punchline.replace(/(peter)/g,"Peter");
+    this.punchline = this.punchline.replace(/(jeb)/g,"Jeb");
+    this.punchline = this.punchline.replace(/(freshdirect)/g,"Freshdirect");
+    this.punchline = this.punchline.replace(/(cctv)/g,"CCTV");
+    this.punchline = this.punchline.replace(/(dumbledore)/g,"Dumbledore");
     // print(this.punchline);
   }
   
