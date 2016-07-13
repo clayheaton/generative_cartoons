@@ -122,24 +122,16 @@ function DNA() {
     }
 
     // Clean up the generated punchline.
-    // This isn't working  - need to use regex.
-    // this.punchline = this.punchline.replace(" i."," I.");
-    // this.punchline = this.punchline.replace("I is","I am");
-    // 
+
+    
+    this.punchline = this.punchline.trim();
     this.punchline = this.applySentenceCase(this.punchline);
     this.punchline = this.punchline.replace(/i(?=[\s.,!"'\b])/g, "I");
     this.punchline = this.punchline.replace(" 's", "'s");
     this.punchline = this.punchline.replace("s ' ", "s' ");
     this.punchline = this.punchline.replace(/(I is )/g, "I am ");
     this.punchline = this.punchline.replace(/(Him is )/g, "He is ");
-    // this.punchline = this.punchline.replace(/(hatfield)/g,"Hatfield");
-    // this.punchline = this.punchline.replace(/(mccoy)/g,"McCoy");
-    // this.punchline = this.punchline.replace(/(peter)/g,"Peter");
-    // this.punchline = this.punchline.replace(/(jeb)/g,"Jeb");
-    // this.punchline = this.punchline.replace(/(freshdirect)/g,"Freshdirect");
-    // this.punchline = this.punchline.replace(/(dumbledore)/g,"Dumbledore");
     this.punchline = this.punchline.replace(/(cctv)/g, "CCTV");
-    // print(this.punchline);
   }
 
   // This method is used to create the initial population of comics. 
