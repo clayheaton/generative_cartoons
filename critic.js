@@ -173,10 +173,10 @@ function Critic(){
   
   this.display = function(){
     this.displayBorder();
-    textAlign(LEFT);
+    textAlign(CENTER);
     textSize(18);
     fill(0);
-    text("Comic Critic",50,50);
+    text("Comic Critic",100,25);
     
     textSize(14);
     textAlign(LEFT);
@@ -185,10 +185,10 @@ function Critic(){
     inst += "cartoons in each generation.\n\nAfter " + parseInt(comicBookSize / 2) + " clicks, the critic commissions the next generation.";
     inst += "\n\nPress 'r' to reset.";
     
-    text(inst,10,220,190,280);
+    text(inst,10,160,190,280);
     
-    textAlign(CENTER);
-    text("Generation " + this.generation,100,500);
+    textAlign(LEFT);
+    text("Generation " + this.generation,10,450);
     
     // TODO: Change attitude.
     
@@ -197,12 +197,12 @@ function Critic(){
     } else if (this.use_pixels_high){
       this.cNeutral.setScaleByPixelHeight(this.pixels_high);
     }
-    this.cNeutral.display(50,100);
+    this.cNeutral.display(50,40);
   }
   
   this.displayBorder = function(){
     noStroke();
     fill("#efefef");
-    rect(0,0,200,height);
+    rect(0,0,200,bgHeightInPixels+10);
   }
 }
