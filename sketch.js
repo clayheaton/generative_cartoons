@@ -13,6 +13,8 @@ var maxX     = 0.8;
 var minY     = 0.25;
 var maxY     = 0.5;
 
+var touched = false;
+
 // How many people can be in a cartoon.
 var minPeople = 1;
 var maxPeople = 3;
@@ -132,7 +134,18 @@ function draw() {
 }
 
 function mouseClicked(){
+  if(touched){
+    touched = false;
+    return false;
+  } else {
+    loop();
+  }
+}
+
+function touchEnded() {
+  touched = true;
   loop();
+  return false;
 }
 
 function keyTyped(){
